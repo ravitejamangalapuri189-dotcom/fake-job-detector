@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fake Job Detector</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background:#f2f2f2;
+            text-align:center;
+            margin-top:50px;
+        }
+
+        .container{
+            width:700px;
+            margin:auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 10px gray;
+        }
+
+        textarea{
+            width:100%;
+            height:200px;
+            font-size:16px;
+            padding:10px;
+        }
+
+        button{
+            margin-top:20px;
+            padding:10px 30px;
+            font-size:18px;
+            background:#007BFF;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        h2{
+            color:#333;
+        }
+
+        h3{
+            color:green;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Fake Job Detection System</h2>
+
+<form action="/predict" method="POST">
+
+<textarea
+name="job"
+placeholder="Paste Job Description Here..."
+required></textarea>
+
+<br>
+
+<button type="submit">
+Check Job
+</button>
+
+</form>
+
+{% if prediction %}
+
+<h3>{{ prediction }}</h3>
+{% if reasons %}
+<h4>Suspicious Keywords Found:</h4>
+
+<ul style="display:inline-block; text-align:left;">
+{% for word in reasons %}
+    <li>{{ word }}</li>
+{% endfor %}
+</ul>
+     {% endif %}
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
